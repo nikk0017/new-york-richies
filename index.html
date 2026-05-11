@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New York Richie's | Official</title>
+    <title>New York Richie's | Elite Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --ny-red: #E31837;
             --glass: rgba(255, 255, 255, 0.08);
-            --glass-dark: rgba(0, 0, 0, 0.6);
+            --glass-dark: rgba(0, 0, 0, 0.7);
         }
 
         body, html {
@@ -20,23 +20,17 @@
             min-height: 100vh;
         }
 
-        /* 1. FORCED WALLPAPER FIX */
-        .wallpaper {
+        /* WALLPAPER FIX: Pulls image & adds deep red glow if image fails */
+        .wallpaper-container {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -2;
-            background: url('cover.webp') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('cover.webp');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
-        }
-
-        /* 2. LIVE OVERLAY (Ensures background isn't just black) */
-        .overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(227, 24, 55, 0.15), #000);
+            background-color: #1a0505; /* Emergency Background */
         }
 
         .container {
@@ -46,37 +40,37 @@
             text-align: center;
         }
 
-        /* HERO / COVER SECTION */
-        .hero {
+        /* HERO / COVER PHOTO */
+        .hero-header {
             width: 100%;
-            height: 220px;
+            height: 230px;
             background: url('cover.webp') center/cover no-repeat;
             border-bottom: 4px solid var(--ny-red);
             position: relative;
-            margin-bottom: 80px;
+            margin-bottom: 85px;
         }
 
         .logo-box {
             position: absolute;
-            bottom: -60px;
+            bottom: -65px;
             left: 50%;
             transform: translateX(-50%);
             width: 150px; height: 150px;
             background: #fff;
             border-radius: 50%;
             border: 4px solid var(--ny-red);
-            box-shadow: 0 0 40px rgba(227, 24, 55, 0.8);
+            box-shadow: 0 0 50px rgba(227, 24, 55, 0.7);
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
 
         .logo-box img { width: 90%; height: 90%; object-fit: contain; }
 
-        h1 { font-size: 2.2rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        h1 { font-size: 2.3rem; font-weight: 900; margin: 0; letter-spacing: -1px; text-transform: uppercase; }
         .tagline { color: var(--ny-red); font-size: 0.8rem; font-weight: 800; letter-spacing: 4px; margin-top: 5px; }
 
-        /* BUTTON STACK */
-        .stack { width: 88%; margin: 40px auto; display: flex; flex-direction: column; gap: 15px; }
+        /* BUTTONS */
+        .btn-list { width: 88%; margin: 40px auto; display: flex; flex-direction: column; gap: 15px; }
 
         .btn {
             display: flex; align-items: center; justify-content: space-between;
@@ -88,63 +82,63 @@
             text-decoration: none;
             font-weight: 700;
             backdrop-filter: blur(15px);
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .btn:hover { background: var(--ny-red); transform: translateY(-5px); }
-        .prime { background: var(--ny-red); border: none; box-shadow: 0 10px 30px rgba(227, 24, 55, 0.5); }
+        .btn:hover { background: var(--ny-red); transform: translateY(-5px); border-color: transparent; }
+        .order-btn { background: var(--ny-red); border: none; box-shadow: 0 10px 30px rgba(227, 24, 55, 0.5); }
 
-        /* GOOGLE FEEDBACK SECTION */
-        .feedback-card {
+        /* UPDATED FEEDBACK SECTION */
+        .feedback-box {
             width: 88%;
             margin: 20px auto;
             background: var(--glass-dark);
-            border: 1px solid var(--ny-red);
+            border: 1px solid rgba(227, 24, 55, 0.5);
             border-radius: 25px;
-            padding: 20px;
+            padding: 25px;
             backdrop-filter: blur(10px);
         }
 
-        .stars { color: #FFD700; font-size: 1.2rem; margin-bottom: 10px; }
+        .stars { color: #FFD700; font-size: 1.3rem; margin-bottom: 10px; }
         
-        .feedback-btn {
+        .feedback-link {
             display: inline-block;
-            margin-top: 10px;
-            padding: 12px 25px;
+            margin-top: 12px;
+            padding: 12px 30px;
             background: #fff;
             color: #000;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 800;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
         }
 
         /* SOCIALS */
-        .socials { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 88%; margin: 30px auto; }
-        .s-box { height: 70px; background: var(--glass); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,0.1); }
-        .s-box:hover { background: var(--ny-red); }
+        .social-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 88%; margin: 30px auto; }
+        .s-box { height: 75px; background: var(--glass); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; text-decoration: none; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .s-box:hover { background: var(--ny-red); transform: scale(1.1); }
 
-        .footer { width: 88%; margin: 40px auto; padding: 25px; background: rgba(0,0,0,0.6); border-radius: 25px; text-align: left; border-left: 5px solid var(--ny-red); }
+        .footer { width: 88%; margin: 40px auto; padding: 25px; background: rgba(0,0,0,0.6); border-radius: 25px; text-align: left; border-left: 6px solid var(--ny-red); }
     </style>
 </head>
 <body>
 
-<div class="wallpaper"></div>
-<div class="overlay"></div>
+<div class="wallpaper-container"></div>
 
 <div class="container">
-    <div class="hero">
+    <div class="hero-header">
         <div class="logo-box">
-            <img src="logo.jpg" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3132/3132693.png'">
+            <img src="logo.jpg" alt="Richie's Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3132/3132693.png'">
         </div>
     </div>
 
     <h1>NEW YORK RICHIE'S</h1>
     <div class="tagline">GARDEN CITY, IDAHO</div>
 
-    <div class="stack">
-        <a href="https://newyorkrichiesboise.com" class="btn prime">
+    <div class="btn-list">
+        <a href="https://newyorkrichiesboise.com" class="btn order-btn">
             <span><i class="fas fa-pizza-slice"></i>   ORDER ONLINE NOW</span>
             <i class="fas fa-chevron-right" style="opacity:0.6"></i>
         </a>
@@ -155,21 +149,21 @@
         </a>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <a href="https://www.google.com/maps?q=New+York+Richie's+Garden+City" class="btn" style="justify-content:center;">GOOGLE MAPS</a>
+            <a href="http://googleusercontent.com/maps.google.com/18" class="btn" style="justify-content:center;">GOOGLE MAPS</a>
             <a href="http://maps.apple.com/?daddr=5865+N+Glenwood+St+Garden+City+ID+83714" class="btn" style="justify-content:center;">APPLE MAPS</a>
         </div>
     </div>
 
-    <div class="feedback-card">
+    <div class="feedback-box">
         <div class="stars">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
-        <p style="margin: 0; font-weight: 600;">Love our Pizza?</p>
-        <p style="margin: 5px 0 15px; font-size: 0.8rem; opacity: 0.8;">Leave us a review on Google!</p>
-        <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review" class="feedback-btn">Give Feedback</a>
+        <p style="margin: 0; font-weight: 700; font-size: 1.1rem;">Enjoyed your meal?</p>
+        <p style="margin: 5px 0 15px; font-size: 0.85rem; opacity: 0.9;">Help us grow by leaving a review!</p>
+        <a href="https://g.page/r/CUYItzqeGzFnEBM/review" class="feedback-link" target="_blank">Give Feedback</a>
     </div>
 
-    <div class="socials">
+    <div class="social-row">
         <a href="https://www.instagram.com/newyorkrichiesboise" class="s-box"><i class="fab fa-instagram"></i></a>
         <a href="https://www.facebook.com/share/1RXGRJzYYV/" class="s-box"><i class="fab fa-facebook-f"></i></a>
         <a href="https://www.yelp.com/biz/new-york-richies-garden-city" class="s-box"><i class="fab fa-yelp"></i></a>
@@ -177,10 +171,10 @@
     </div>
 
     <div class="footer">
-        <p style="margin:0; font-weight:800; color:var(--ny-red); font-size: 0.7rem;">📍 ADDRESS</p>
-        <p style="margin:5px 0 20px;">5865 N Glenwood St, Garden City, ID 83714</p>
-        <p style="margin:0; font-weight:800; color:var(--ny-red); font-size: 0.7rem;">⏰ HOURS</p>
-        <p style="margin:5px 0 0;">Tue - Sun: Open (Monday Closed)</p>
+        <p style="margin:0; font-weight:800; color:var(--ny-red); font-size: 0.75rem; letter-spacing: 2px;">📍 ADDRESS</p>
+        <p style="margin:5px 0 20px; font-weight: 600;">5865 N Glenwood St, Garden City, ID 83714</p>
+        <p style="margin:0; font-weight:800; color:var(--ny-red); font-size: 0.75rem; letter-spacing: 2px;">⏰ HOURS</p>
+        <p style="margin:5px 0 0; font-weight: 600;">Tue - Sun: Open (Monday Closed)</p>
     </div>
 </div>
 
