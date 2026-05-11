@@ -11,71 +11,45 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    overflow: hidden;
     color: white;
+    overflow: hidden;
 }
 
-/* 🔥 LIVE GRADIENT BACKGROUND */
+/* 🍕 PREMIUM RESTAURANT LIVE BACKGROUND */
 .bg {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(270deg, #ff512f, #dd2476, #ff9a00, #ff512f);
-    background-size: 800% 800%;
-    animation: gradientMove 15s ease infinite;
+    width: 140%;
+    height: 140%;
+    top: -20%;
+    left: -20%;
     z-index: -3;
+
+    background:
+        radial-gradient(circle at 20% 30%, #ff3c00 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, #ff9a00 0%, transparent 40%),
+        radial-gradient(circle at 60% 20%, #ff0055 0%, transparent 35%),
+        radial-gradient(circle at 30% 80%, #ff6a00 0%, transparent 40%),
+        #1a0d05;
+
+    animation: flow 25s ease-in-out infinite alternate;
 }
 
-@keyframes gradientMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-/* 🔥 FLOATING LIGHT BLOBS */
-.blob {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.6;
-    z-index: -2;
-}
-
-.blob1 {
-    width: 300px;
-    height: 300px;
-    background: #ff0000;
-    top: 10%;
-    left: 10%;
-    animation: float 10s infinite alternate;
-}
-
-.blob2 {
-    width: 250px;
-    height: 250px;
-    background: #ff9900;
-    bottom: 10%;
-    right: 10%;
-    animation: float 12s infinite alternate;
-}
-
-@keyframes float {
-    from { transform: translateY(0px); }
-    to { transform: translateY(40px); }
+@keyframes flow {
+    0% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.05); }
+    100% { transform: translate(30px, -40px) scale(1.1); }
 }
 
 /* CARD */
 .card {
     width: 90%;
     max-width: 420px;
-    margin: 50px auto;
+    margin: 40px auto;
     padding: 25px;
     border-radius: 25px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.15);
     backdrop-filter: blur(20px);
-    box-shadow: 0 10px 50px rgba(0,0,0,0.3);
     text-align: center;
-    animation: fadeUp 1s ease;
 }
 
 /* LOGO */
@@ -87,15 +61,10 @@ body {
 }
 
 /* TEXT */
-h1 {
-    margin: 10px 0;
-}
-.tagline {
-    font-size: 13px;
-    opacity: 0.9;
-}
+h1 { margin: 10px 0; }
+.tagline { font-size: 13px; opacity: 0.9; }
 
-/* ICON GRID */
+/* GRID */
 .icons {
     margin-top: 25px;
     display: grid;
@@ -103,47 +72,43 @@ h1 {
     gap: 18px;
 }
 
+.item { text-align: center; }
+
+/* BUTTON */
 .icon-btn {
     padding: 16px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.25);
     transition: 0.3s;
 }
 
-.icon-btn img {
-    width: 30px;
-}
+.icon-btn img { width: 30px; }
 
 .icon-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
 }
 
-/* CALL BUTTON */
+/* LABEL */
+.label {
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+/* CALL BUTTON (ONLY HERE) */
 .call {
-    margin-top: 25px;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .call a {
-    display: inline-block;
     padding: 12px 28px;
     border-radius: 30px;
-    background: linear-gradient(45deg, #ff0000, #ff9a00);
+    background: #ff0000;
     color: white;
     text-decoration: none;
     font-weight: 600;
-}
-
-/* INFO */
-.info {
-    margin-top: 15px;
-    font-size: 12px;
-    opacity: 0.9;
-}
-
-@keyframes fadeUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
 }
 </style>
 </head>
@@ -151,56 +116,71 @@ h1 {
 <body>
 
 <div class="bg"></div>
-<div class="blob blob1"></div>
-<div class="blob blob2"></div>
 
 <div class="card">
 
-    <img src="logo.jpg" class="logo">
+<img src="logo.jpg" class="logo">
 
-    <h1>New York Richie's</h1>
-    <p class="tagline">Pizza • Burgers • Sandwiches</p>
+<h1>New York Richie's</h1>
+<p class="tagline">Pizza • Burgers • Sandwiches</p>
 
-    <div class="icons">
+<div class="icons">
 
-        <a href="tel:+12083230003" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/phone.png"/>
-        </a>
+<!-- GOOGLE MAP -->
+<div class="item">
+<a href="https://www.google.com/maps/search/?api=1&query=5865+N+Glenwood+St+Garden+City+ID+83714" class="icon-btn">
+<img src="https://img.icons8.com/color/48/google-maps.png"/>
+</a>
+<div class="label">Google Map</div>
+</div>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=5865+N+Glenwood+St+Garden+City+ID+83714" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/google-maps.png"/>
-        </a>
+<!-- INSTAGRAM -->
+<div class="item">
+<a href="https://www.instagram.com/newyorkrichiesboise" class="icon-btn">
+<img src="https://img.icons8.com/color/48/instagram-new.png"/>
+</a>
+<div class="label">Instagram</div>
+</div>
 
-        <a href="https://www.instagram.com/newyorkrichiesboise" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/instagram-new.png"/>
-        </a>
+<!-- FACEBOOK -->
+<div class="item">
+<a href="https://www.facebook.com/share/1RXGRJzYYV" class="icon-btn">
+<img src="https://img.icons8.com/color/48/facebook-new.png"/>
+</a>
+<div class="label">Facebook</div>
+</div>
 
-        <a href="https://www.facebook.com/share/1RXGRJzYYV" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/facebook-new.png"/>
-        </a>
+<!-- GOOGLE REVIEW -->
+<div class="item">
+<a href="https://g.page/r/CUYItzqeGzFnEBM/review" class="icon-btn">
+<img src="https://img.icons8.com/color/48/google-logo.png"/>
+</a>
+<div class="label">Give Review</div>
+</div>
 
-        <a href="https://g.page/r/CUYItzqeGzFnEBM/review" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/google-logo.png"/>
-        </a>
+<!-- WEBSITE -->
+<div class="item">
+<a href="https://newyorkrichiesboise.com" class="icon-btn">
+<img src="https://img.icons8.com/color/48/domain.png"/>
+</a>
+<div class="label">Order Online</div>
+</div>
 
-        <a href="https://newyorkrichiesboise.com" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/domain.png"/>
-        </a>
+<!-- YELP -->
+<div class="item">
+<a href="https://www.yelp.com/biz/new-york-richies-garden-city" class="icon-btn">
+<img src="https://img.icons8.com/color/48/yelp.png"/>
+</a>
+<div class="label">Yelp</div>
+</div>
 
-        <a href="https://www.yelp.com/biz/new-york-richies-garden-city" class="icon-btn">
-            <img src="https://img.icons8.com/color/48/yelp.png"/>
-        </a>
+</div>
 
-    </div>
+</div>
 
-    <div class="call">
-        <a href="tel:+12083230003">📞 Call Now</a>
-    </div>
-
-    <div class="info">
-        📍 Garden City, Idaho
-    </div>
-
+<!-- CALL BUTTON -->
+<div class="call">
+<a href="tel:+12083230003">📞 Call Now</a>
 </div>
 
 </body>
