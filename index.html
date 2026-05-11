@@ -8,33 +8,49 @@
     <style>
         :root {
             --ny-red: #E31837;
-            --glass: rgba(255, 255, 255, 0.1);
+            --ny-dark: #000000;
+            --glass: rgba(255, 255, 255, 0.08);
         }
 
         body, html {
             margin: 0; padding: 0;
-            background: #000;
-            font-family: 'Segoe UI', sans-serif;
-            color: #fff;
+            background: var(--ny-dark);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+            color: white;
         }
 
-        /* PREMIUM ANIMATED BACKGROUND */
-        .bg-video {
+        /* LIVE ANIMATED GRADIENT BACKGROUND (No Video Needed) */
+        .live-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: -1;
-            object-fit: cover;
-            filter: brightness(0.4) contrast(1.2); /* Makes text pop */
+            background: radial-gradient(circle at 50% 50%, #2c0707, #000000, #000000);
+            background-size: 200% 200%;
+            animation: moveGradient 8s ease infinite;
         }
 
-        /* FALLBACK IMAGE if video fails (High Quality Pizza) */
-        .bg-fallback {
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FLOATING PARTICLES EFFECT */
+        .particles {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -2;
-            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop') center/cover;
+            z-index: -1;
+            background-image: radial-gradient(rgba(227, 24, 55, 0.2) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: particleMove 20s linear infinite;
+        }
+
+        @keyframes particleMove {
+            from { transform: translateY(0); }
+            to { transform: translateY(-1000px); }
         }
 
         .container {
@@ -42,75 +58,103 @@
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            padding-bottom: 40px;
-        }
-
-        /* FLOATING LOGO */
-        .hero {
-            height: 280px;
             display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            position: relative;
-        }
-
-        .logo-box {
-            width: 150px; height: 150px;
-            background: #fff;
-            border-radius: 50%;
-            border: 5px solid var(--ny-red);
-            box-shadow: 0 0 30px rgba(227, 24, 55, 0.6);
-            overflow: hidden;
-            transform: translateY(40px);
-        }
-
-        /* DASHBOARD CONTENT */
-        .main-ui {
-            padding: 80px 25px 20px;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
             text-align: center;
         }
 
-        h1 { font-size: 2.2rem; margin: 0; font-weight: 900; letter-spacing: -1px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .tag { font-size: 0.8rem; font-weight: 800; color: var(--ny-red); letter-spacing: 3px; margin-top: 5px; }
+        /* GLOWING LOGO BOX */
+        .logo-box {
+            width: 160px; height: 160px;
+            background: #fff;
+            border-radius: 50%;
+            border: 4px solid var(--ny-red);
+            box-shadow: 0 0 40px rgba(227, 24, 55, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
 
-        .btn-stack { display: flex; flex-direction: column; gap: 15px; margin-top: 40px; }
+        .logo-box img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .tagline {
+            color: var(--ny-red);
+            font-weight: 800;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* DASHBOARD BUTTONS */
+        .btn-list {
+            width: 85%;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
         .btn {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
             background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             color: #fff;
             text-decoration: none;
             font-weight: 700;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
+            backdrop-filter: blur(15px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .btn:hover { background: var(--ny-red); transform: scale(1.02); border-color: transparent; }
+        .btn:hover {
+            background: rgba(227, 24, 55, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--ny-red);
+        }
+
+        .btn i { font-size: 1.4rem; color: var(--ny-red); }
 
         /* PULSING ORDER BUTTON */
         .order-prime {
             background: var(--ny-red);
             border: none;
-            box-shadow: 0 10px 20px rgba(227, 24, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(227, 24, 55, 0.5);
             animation: pulse 2s infinite;
         }
 
+        .order-prime i { color: #fff; }
+
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(227, 24, 55, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(227, 24, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(227, 24, 55, 0); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
 
-        /* BIG OFFICIAL SOCIALS */
-        .social-row {
+        /* BIG SOCIALS */
+        .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
+            width: 85%;
             margin-top: 40px;
         }
 
@@ -118,75 +162,72 @@
             height: 75px;
             background: var(--glass);
             border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2.2rem; color: #fff; text-decoration: none;
-            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
         }
 
-        .s-box:hover { transform: translateY(-5px); color: white; }
-        .insta:hover { background: #E1306C; }
-        .face:hover { background: #1877F2; }
-        .yelp:hover { background: #AF0606; }
-        .what:hover { background: #25D366; }
+        .s-box:hover { transform: translateY(-8px); background: var(--ny-red); }
 
-        /* FOOTER CARD */
-        .footer-info {
-            margin: 40px 20px;
+        .location-card {
+            margin-top: 50px;
+            width: 85%;
             padding: 25px;
-            background: rgba(0,0,0,0.6);
-            border-radius: 30px;
-            border-left: 5px solid var(--ny-red);
+            background: rgba(0,0,0,0.5);
+            border-radius: 25px;
+            border-bottom: 5px solid var(--ny-red);
+            text-align: left;
             font-size: 0.9rem;
-            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
-<video class="bg-video" autoplay muted loop playsinline poster="cover.webp">
-    <source src="https://assets.mixkit.co/videos/preview/mixkit-fresh-pizza-with-mushrooms-and-pepperoni-4940-large.mp4" type="video/mp4">
-</video>
-<div class="bg-fallback"></div>
+<div class="live-bg"></div>
+<div class="particles"></div>
 
 <div class="container">
-    <div class="hero">
-        <div class="logo-box">
-            <img src="logo.jpg" style="width:100%; height:100%; object-fit:contain;" onerror="this.src='https://via.placeholder.com/150?text=Richies'">
+    <div class="logo-box">
+        <img src="logo.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/150?text=Richies'">
+    </div>
+
+    <h1>NEW YORK RICHIE'S</h1>
+    <div class="tagline">EST. GARDEN CITY, ID</div>
+
+    <div class="btn-list">
+        <a href="https://newyorkrichiesboise.com" class="btn order-prime">
+            <span><i class="fas fa-pizza-slice"></i> &nbsp; ORDER ONLINE NOW</span>
+            <i class="fas fa-chevron-right" style="color:white; font-size: 0.8rem; opacity: 0.6;"></i>
+        </a>
+        
+        <a href="tel:+12083230003" class="btn">
+            <span><i class="fas fa-phone-alt"></i> &nbsp; CALL (208) 323-0003</span>
+            <i class="fas fa-chevron-right" style="font-size: 0.8rem; opacity: 0.4;"></i>
+        </a>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <a href="https://www.google.com/maps/contrib/107924237845650644058/reviews3" class="btn" style="justify-content:center;">GOOGLE</a>
+            <a href="http://maps.apple.com/?daddr=5865+N+Glenwood+St+Garden+City+ID+83714" class="btn" style="justify-content:center;">APPLE</a>
         </div>
     </div>
 
-    <div class="main-ui">
-        <h1>NEW YORK RICHIE'S</h1>
-        <div class="tag">EST. GARDEN CITY</div>
-
-        <div class="btn-stack">
-            <a href="https://newyorkrichiesboise.com" class="btn order-prime">
-                <span><i class="fas fa-utensils"></i> &nbsp; ORDER ONLINE</span>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-            <a href="tel:+12083230003" class="btn">
-                <span><i class="fas fa-phone-alt"></i> &nbsp; CALL US</span>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <a href="https://www.google.com/maps/contrib/107924237845650644058/reviews2" class="btn" style="justify-content:center;">GOOGLE</a>
-                <a href="http://maps.apple.com/?daddr=5865+N+Glenwood+St+Garden+City+ID+83714" class="btn" style="justify-content:center;">APPLE</a>
-            </div>
-        </div>
-
-        <div class="social-row">
-            <a href="https://www.instagram.com/newyorkrichiesboise" class="s-box insta"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/1RXGRJzYYV/" class="s-box face"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.yelp.com/biz/new-york-richies-garden-city" class="s-box yelp"><i class="fab fa-yelp"></i></a>
-            <a href="https://wa.me/12083230003" class="s-box what"><i class="fab fa-whatsapp"></i></a>
-        </div>
+    <div class="social-grid">
+        <a href="https://www.instagram.com/newyorkrichiesboise" class="s-box"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1RXGRJzYYV/" class="s-box"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.yelp.com/biz/new-york-richies-garden-city" class="s-box"><i class="fab fa-yelp"></i></a>
+        <a href="https://wa.me/12083230003" class="s-box"><i class="fab fa-whatsapp"></i></a>
     </div>
 
-    <div class="footer-info">
-        <strong style="color:var(--ny-red); display:block; margin-bottom:5px;">📍 LOCATION</strong>
+    <div class="location-card">
+        <strong style="color:var(--ny-red);">📍 VISIT US</strong><br>
         5865 N Glenwood St, Garden City, ID 83714<br><br>
-        <strong style="color:var(--ny-red); display:block; margin-bottom:5px;">⏰ HOURS</strong>
-        Tue-Sun: Open | Monday: Closed
+        <strong style="color:var(--ny-red);">⏰ HOURS</strong><br>
+        Tue - Sun: Open | Mon: Closed
     </div>
 </div>
 
